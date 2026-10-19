@@ -2,9 +2,20 @@
 
 **100,000 steering agents in your browser — a GPU crowd simulation written in raw WebGPU + WGSL, no engine, no framework.**
 
-> 📸 _Screenshot / GIF goes here._ Record a 5–10 s capture at 10k and 100k agents (e.g. with ScreenToGif or `ffmpeg`), save it as `docs/demo.gif` and replace this line with `![demo](docs/demo.gif)`.
+### ▶ [Live demo](https://iodiot.github.io/webgpu-crowd/) — https://iodiot.github.io/webgpu-crowd/
 
-**Live demo:** `https://<your-github-user>.github.io/webgpu-crowd/` (after enabling Pages, see below)
+Open it in Chrome / Edge 113+ (or any browser with WebGPU enabled). Try `?agents=50000` for a stress test.
+
+![WebGPU Crowd: 10,000 agents streaming between gates around obstacles](docs/screenshot.png)
+
+<details>
+<summary>Animated capture (GIF)</summary>
+
+![WebGPU Crowd animation](docs/demo.gif)
+
+</details>
+
+<sub>Captures are real frames from the running demo (10k agents), recorded on a headless Linux box with Chrome's software WebGPU adapter (SwiftShader), so motion in the GIF is slower than on a real GPU.</sub>
 
 ## Features
 
@@ -93,16 +104,14 @@ npm run lint
 
 `vite.config.ts` sets `base: '/webgpu-crowd/'`, so the repository should be named **`webgpu-crowd`** (otherwise change `base`).
 
-1. Create an empty public repo `webgpu-crowd` on GitHub.
-2. Push:
-   ```bash
-   git init && git add . && git commit -m "WebGPU crowd simulation"
-   git branch -M main
-   git remote add origin git@github.com:<your-github-user>/webgpu-crowd.git
-   git push -u origin main
-   ```
-3. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-4. The included workflow (`.github/workflows/deploy.yml`) lints, builds and deploys on every push to `main`. The site appears at `https://<your-github-user>.github.io/webgpu-crowd/`.
+The live demo is served from the `gh-pages` branch (Settings → Pages → Deploy from a branch → `gh-pages` / root):
+
+```bash
+npm run build
+touch dist/.nojekyll
+# publish the contents of dist/ to the gh-pages branch, e.g.
+npx gh-pages -d dist --dotfiles
+```
 
 ## License
 
